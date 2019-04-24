@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane minHeight="200.0" minWidth="200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.clockViewController">
+   <children>
+      <Circle fill="#ffffff85" radius="95.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Line fx:id="handSeconds" endX="100.0" endY="10.0" startX="100.0" startY="100.0" stroke="#ab0606" strokeLineCap="ROUND">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+      <Line fx:id="handMinutes" endX="100.0" endY="20.0" startX="100.0" startY="100.0" strokeLineCap="ROUND" strokeWidth="3.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+      <Line fx:id="handHours" endX="100.0" endY="50.0" startX="100.0" startY="100.0" strokeLineCap="ROUND" strokeWidth="7.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+      <Circle centerX="100.0" centerY="100.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="1.0">
+               <stops>
+                  <Stop color="#4d4d4d" />
+                  <Stop color="#656565" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Circle>
+   </children>
+</AnchorPane>
