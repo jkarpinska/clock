@@ -1,15 +1,16 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.paint.Color;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
-
-import java.time.Clock;
 import java.time.LocalTime;
 
 public class clockViewController {
     private Main mainApp;
+    private double deltaX;
+    private double deltaY;
 
     @FXML
     Line handMinutes = new Line();
@@ -17,13 +18,18 @@ public class clockViewController {
     Line handHours = new Line();
     @FXML
     Line handSeconds = new Line();
+    @FXML
+    Button btClose = new Button();
 
     @FXML
     private void initialize(){
         //createHoursMarks();
         setHoursHandPosition();
-        setMinutesHandPostition();
+        setMinutesHandPosition();
         setSecondsHandPosition();
+        btClose.setVisible(false);
+
+
     }
 
     public void setMainApp(Main mainApp){
@@ -31,7 +37,7 @@ public class clockViewController {
         mainApp.addItems();
     }
 
-    public void setHoursHandPosition(){
+    private void setHoursHandPosition(){
         double angle = getHour()*30 + getMinutes()*0.5;
         handHours.getTransforms().add(new Rotate(angle, 100, 100));
     }
@@ -46,7 +52,7 @@ public class clockViewController {
         handHours.getTransforms().add(new Rotate(0.5, 100, 100));
     }
 
-    private void setMinutesHandPostition(){
+    private void setMinutesHandPosition(){
         double angle = getMinutes()*6;
         handMinutes.getTransforms().add(new Rotate(angle, 100, 100));
     }
@@ -60,7 +66,7 @@ public class clockViewController {
         handMinutes.getTransforms().add(new Rotate(6, 100, 100));
     }
 
-    public void setSecondsHandPosition(){
+    private void setSecondsHandPosition(){
         int angle = getSeconds()*6;
         handSeconds.getTransforms().add(new Rotate(angle, 100, 100));
     }
@@ -75,12 +81,30 @@ public class clockViewController {
     }
 
 
-    private void createHoursMarks(){
-
+    @FXML
+    private void getMousePosition(MouseEvent event){
+        deltaX = event.getSceneX();
+        deltaY = event.getSceneY();
     }
 
-    private void showMenuBar(){
+    @FXML
+    private void moveStage(MouseEvent event){
+        mainApp.setStageNewPosition(event.getScreenX() - deltaX, event.getScreenY() - deltaY);
+    }
 
+    @FXML
+    private void showCloseButton(){
+        btClose.setVisible(true);
+    }
+
+    @FXML
+    private void hideCloseButton(){
+        btClose.setVisible(false);
+    }
+
+    @FXML
+    private void closeApp(){
+        mainApp.closeApp();
     }
 
 }

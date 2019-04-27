@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="200.0" minWidth="200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.clockViewController">
-   <children>
-      <Circle fill="#ffffff85" radius="95.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+<AnchorPane minHeight="200.0" minWidth="200.0" onMouseDragged="#moveStage" onMouseEntered="#showCloseButton" onMouseExited="#hideCloseButton" onMousePressed="#getMousePosition" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.clockViewController">
+
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff01" height="200.0" onMouseEntered="#showCloseButton" onMouseExited="#hideCloseButton" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Circle fill="WHITE" onMouseEntered="#showCloseButton" pickOnBounds="true" radius="95.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
       <Line fx:id="handSeconds" endX="100.0" endY="10.0" startX="100.0" startY="100.0" stroke="#ab0606" strokeLineCap="ROUND">
          <effect>
             <DropShadow />
@@ -27,7 +32,7 @@
       </Line>
       <Circle centerX="100.0" centerY="100.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <fill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="1.0">
+            <RadialGradient centerX="0.5" centerY="0.5" >
                <stops>
                   <Stop color="#4d4d4d" />
                   <Stop color="#656565" offset="1.0" />
@@ -35,5 +40,13 @@
             </RadialGradient>
          </fill>
       </Circle>
-   </children>
+      <Button fx:id="btClose" contentDisplay="CENTER" layoutX="148.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onMouseClicked="#closeApp" style="-fx-background-color: #00000050;" text="X" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Button>
+
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

@@ -6,10 +6,9 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -21,26 +20,27 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("clockView.fxml"));
-        primaryStage.setTitle("Analog Clock");
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        this.primaryStage.setTitle("Analog Clock");
+        this.primaryStage.initStyle(StageStyle.TRANSPARENT);
+        this.primaryStage.getIcons().add(new Image("file:clock_icon.png"));
+        this.primaryStage.setResizable(false);
 
-        rootLayout = (AnchorPane) loader.load();
+        rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         scene.setFill(null);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+        this.primaryStage.setScene(scene);
+        this.primaryStage.show();
 
         clockViewController controller = loader.getController();
         controller.setMainApp(this);
 
 
-        Timeline timelineEveryMinute = new Timeline(new KeyFrame(Duration.minutes(1), event -> {
-            controller.moveHoursHand();
-
-        }));
+        Timeline timelineEveryMinute = new Timeline(new KeyFrame(Duration.minutes(1), event -> controller.moveHoursHand()));
 
         Timeline timelineEverySecond = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             if (controller.getSeconds() == 0) {
@@ -80,10 +80,17 @@ public class Main extends Application {
             angle += 6;
         }
 
-
-
     }
 
+
+    public void setStageNewPosition(double x, double y){
+        this.primaryStage.setX(x);
+        this.primaryStage.setY(y);
+    }
+
+    public void closeApp(){
+        this.primaryStage.close();
+    }
 
 
     public static void main(String[] args) {
